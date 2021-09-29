@@ -4,8 +4,8 @@ import sys
 
 
 class DatabaseConnection(object):
-    """ Handles the main connection to the database of the app
-          setting """
+    """Handles the main connection to the database of the app
+    setting"""
 
     def __init__(self, database, user, password, host, port):
         self.database = database
@@ -17,30 +17,32 @@ class DatabaseConnection(object):
     def connect(self):
         connection = None
         try:
-            logger.debug_msg('Connecting to the PostgreSQL database...')
+            logger.debug_msg("Connecting to the PostgreSQL database...")
             # Connect to postgres sql database
-            connection = psycopg2.connect(database=self.database,
-                                          user=self.user,
-                                          password=self.password,
-                                          host=self.host,
-                                          port=self.port)
+            connection = psycopg2.connect(
+                database=self.database,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port,
+            )
             # Create a cursor
             cursor = connection.cursor()
 
             # execute a statement
-            cursor.execute('SELECT version()')
+            cursor.execute("SELECT version()")
 
             # display the PostgreSQL database server version
             db_version = cursor.fetchone()
-            logger.debug_msg(f'PostgreSQL database version: {db_version}')
+            logger.debug_msg(f"PostgreSQL database version: {db_version}")
         except (Exception, psycopg2.DatabaseError) as error:
             logger.error("DB-ERROR: ", str(error))
         finally:
             if connection is not None:
                 connection.close()
-                logger.debug_msg('Database is connected successfully.')
+                logger.debug_msg("Database is connected successfully.")
             else:
-                logger.debug_msg('Database is not connected successfully.')
+                logger.debug_msg("Database is not connected successfully.")
                 sys.exit()
 
     def create_table(self, command):
@@ -48,11 +50,13 @@ class DatabaseConnection(object):
         connection = None
         try:
             # Connect to postgres sql database
-            connection = psycopg2.connect(database=self.database,
-                                          user=self.user,
-                                          password=self.password,
-                                          host=self.host,
-                                          port=self.port)
+            connection = psycopg2.connect(
+                database=self.database,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port,
+            )
             # Create a cursor
             cursor = connection.cursor()
             cursor.execute(command)
@@ -71,11 +75,13 @@ class DatabaseConnection(object):
         connection = None
         try:
             # Connect to postgres sql database
-            connection = psycopg2.connect(database=self.database,
-                                          user=self.user,
-                                          password=self.password,
-                                          host=self.host,
-                                          port=self.port)
+            connection = psycopg2.connect(
+                database=self.database,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port,
+            )
             # Create a cursor
             cursor = connection.cursor()
             cursor.execute(sql, values)
@@ -95,11 +101,13 @@ class DatabaseConnection(object):
         connection = None
         try:
             # Connect to postgres sql database
-            connection = psycopg2.connect(database=self.database,
-                                          user=self.user,
-                                          password=self.password,
-                                          host=self.host,
-                                          port=self.port)
+            connection = psycopg2.connect(
+                database=self.database,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port,
+            )
             # Create a cursor
             cursor = connection.cursor()
             cursor.execute(sql)
@@ -119,11 +127,13 @@ class DatabaseConnection(object):
         connection = None
         try:
             # Connect to postgres sql database
-            connection = psycopg2.connect(database=self.database,
-                                          user=self.user,
-                                          password=self.password,
-                                          host=self.host,
-                                          port=self.port)
+            connection = psycopg2.connect(
+                database=self.database,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port,
+            )
             # Create a cursor
             cursor = connection.cursor()
             cursor.execute(sql, values)
@@ -143,11 +153,13 @@ class DatabaseConnection(object):
         connection = None
         try:
             # Connect to postgres sql database
-            connection = psycopg2.connect(database=self.database,
-                                          user=self.user,
-                                          password=self.password,
-                                          host=self.host,
-                                          port=self.port)
+            connection = psycopg2.connect(
+                database=self.database,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port,
+            )
             # Create a cursor
             cursor = connection.cursor()
             cursor.execute(sql)
@@ -168,11 +180,13 @@ class DatabaseConnection(object):
         connection = None
         try:
             # Connect to postgres sql database
-            connection = psycopg2.connect(database=self.database,
-                                          user=self.user,
-                                          password=self.password,
-                                          host=self.host,
-                                          port=self.port)
+            connection = psycopg2.connect(
+                database=self.database,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port,
+            )
             # Create a cursor
             cursor = connection.cursor()
             cursor.execute(sql, values)
@@ -193,11 +207,13 @@ class DatabaseConnection(object):
         connection = None
         try:
             # Connect to postgres sql database
-            connection = psycopg2.connect(database=self.database,
-                                          user=self.user,
-                                          password=self.password,
-                                          host=self.host,
-                                          port=self.port)
+            connection = psycopg2.connect(
+                database=self.database,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port,
+            )
             # Create a cursor
             cursor = connection.cursor()
             cursor.execute(sql, values)

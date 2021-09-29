@@ -1,3 +1,8 @@
-autopep8==1.5.7
-pycodestyle==2.7.0
-toml==0.10.2
+black==21.9b0
+click==8.0.1
+mypy-extensions==0.4.3
+pathspec==0.9.0
+platformdirs==2.4.0
+regex==2021.9.24
+tomli==1.2.1
+typing-extensions==3.10.0.2
