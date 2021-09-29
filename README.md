@@ -19,3 +19,14 @@ bitnami/postgresql:11.4.0
 ```
 psql -U riverfort -h localhost riverfort_notification
 ```
+
+## Install
+```
+cd riverfort-notification
+pip install -r requirements.txt
+```
+
+## Apply formatting
+```
+black .
+```
