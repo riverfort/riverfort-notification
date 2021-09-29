@@ -12,7 +12,12 @@ database.create_table(
 
 print("Creating table companies...")
 database.create_table(
-    "CREATE TABLE IF NOT EXISTS companies (company_symbol VARCHAR(200) PRIMARY KEY)"
+    """
+    CREATE TABLE IF NOT EXISTS companies (
+    company_symbol VARCHAR(200) PRIMARY KEY,
+    company_name VARCHAR(200),
+    exchange VARCHAR(200))
+    """
 )
 
 print("Creating table watchlist...")
