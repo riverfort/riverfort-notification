@@ -11,6 +11,9 @@ with open("/Users/nieqiuyang/Desktop/lse_shares.csv", "r") as f:
     next(reader)
     for row in reader:
         database.insert_data(
-            "INSERT INTO companies (company_symbol, company_name, exchange) VALUES (%s, %s, %s)",
+            """
+            INSERT INTO companies (company_symbol, company_name, exchange) 
+            VALUES (%s, %s, %s)
+            """,
             (row[0], row[1], "LSE"),
         )
