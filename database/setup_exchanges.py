@@ -5,6 +5,7 @@ database = DatabaseConnection(
     "riverfort_notification", "riverfort", "rgctechnology", "localhost", 5432
 )
 
+# Exchange naming references Yahoo Finance
 exchanges = ["London", "AQS"]
 
 for exchange in exchanges:
