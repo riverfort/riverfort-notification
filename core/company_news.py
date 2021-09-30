@@ -7,7 +7,7 @@ database = DatabaseConnection(
 )
 
 
-def send_push_notification():
+def check_company_latest_news():
     company_symbols = fetch_watchlist_companies()
     for company_symbol in company_symbols:
         fetch_company_latest_news(company_symbol)
@@ -57,4 +57,4 @@ def delete_recent_company_news(company_symbol):
     )
 
 
-send_push_notification()
+check_company_latest_news()
