@@ -12,10 +12,23 @@ def fetch_watchlist_companies():
         "SELECT DISTINCT company_symbol FROM watchlist"
     )
     for company_symbol in company_symbols:
-        print(company_symbol[0])
+        fetch_company_latest_news(company_symbol[0])
 
 
-def is_news_in_db(company_symbol, pub_date):
+def fetch_company_latest_news(company_symbol):
+    lateset_feed = feedparser.parse(uk_news_url + company_symbol)["entries"][:1][0]
+    title = lateset_feed["title"]
+    pub_date = lateset_feed["published"]
+    link = lateset_feed["link"]
+    if is_latest_news_in_db(company_symbol, pub_date):
+        print("no news - " + company_symbol)
+    else:
+        print("breaking news! - " + company_symbol)
+        delete_recent_company_news(company_symbol)
+        add_latest_news_to_db(company_symbol, pub_date, title)
+
+
+def is_latest_news_in_db(company_symbol, pub_date):
     result = database.filter_data(
         "SELECT * FROM company_news WHERE company_symbol=%s AND pub_date=%s",
         (company_symbol, pub_date),
@@ -26,29 +39,17 @@ def is_news_in_db(company_symbol, pub_date):
         return True
 
 
-def add_news_to_db(company_symbol, pub_date, title):
+def add_latest_news_to_db(company_symbol, pub_date, title):
     database.insert_data(
-        "INSERT INTO company_news (company_symbol, pub_date, title) VALUES (%s, %s, %s) RETURNING company_ticker",
+        "INSERT INTO company_news (company_symbol, pub_date, title) VALUES (%s, %s, %s) RETURNING company_symbol",
         (company_symbol, pub_date, title),
     )
 
 
-def delete_all_news(company_symbol):
+def delete_recent_company_news(company_symbol):
     database.delete(
-        "DELETE FROM company_news WHERE company_ticker=%s", (company_symbol,)
+        "DELETE FROM company_news WHERE company_symbol=%s", (company_symbol,)
     )
-
-
-def read_news(company_symbol):
-    feeds = feedparser.parse(uk_news_url + company_symbol)["entries"]
-    for feed in feeds:
-        title = feed["title"]
-        pub_date = feed["published"]
-        link = feed["link"]
-        if is_news_in_db(company_symbol, pub_date):
-            print("No new announcement: " + company_symbol)
-        else:
-            print("New announcement: " + company_symbol)
 
 
 fetch_watchlist_companies()
