@@ -39,7 +39,11 @@ black .
 ```
 ---
 ## Company list
-### LSE
+### London
   * Instrument list download: https://docs.londonstockexchange.com/sites/default/files/reports/Instrument%20list_14.xlsx
   * The file is updated monthly and published in the first week of the month. [Link](https://www.londonstockexchange.com/reports?tab=instruments)
   * Capture shares sheet only for news.
+### AQS
+  * Instrument list download: https://aquis-website-eu.s3.amazonaws.com/primary_aqse_summary_july_21.xls
+  * The file seems updated monthly. [Link](https://www.aquis.eu/aquis-stock-exchange/for-investors/market-statistics-data)
+  * Capture All AQSE securities.
