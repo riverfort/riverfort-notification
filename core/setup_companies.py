@@ -1,4 +1,4 @@
-from configuration.config import DatabaseConnection
+from db_config.connection import DatabaseConnection
 import csv
 
 
