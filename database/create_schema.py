@@ -10,13 +10,21 @@ database.create_table(
     "CREATE TABLE IF NOT EXISTS device_tokens (device_token VARCHAR(200) PRIMARY KEY)"
 )
 
+print("Creating table exchanges...")
+database.create_table(
+    """
+    CREATE TABLE IF NOT EXISTS exchanges 
+    (exchange VARCHAR(200) PRIMARY KEY)
+    """
+)
+
 print("Creating table companies...")
 database.create_table(
     """
     CREATE TABLE IF NOT EXISTS companies (
     company_symbol VARCHAR(200) PRIMARY KEY,
     company_name VARCHAR(200),
-    exchange VARCHAR(200))
+    exchange VARCHAR(200) NOT NULL REFERENCES exchanges (exchange) ON UPDATE CASCADE ON DELETE CASCADE)
     """
 )
 
