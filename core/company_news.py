@@ -7,12 +7,17 @@ database = DatabaseConnection(
 )
 
 
+def send_push_notification():
+    company_symbols = fetch_watchlist_companies()
+    for company_symbol in company_symbols:
+        fetch_company_latest_news(company_symbol)
+
+
 def fetch_watchlist_companies():
     company_symbols = database.select_data(
         "SELECT DISTINCT company_symbol FROM watchlist"
     )
-    for company_symbol in company_symbols:
-        fetch_company_latest_news(company_symbol[0])
+    return [i[0] for i in company_symbols]
 
 
 def fetch_company_latest_news(company_symbol):
@@ -52,4 +57,4 @@ def delete_recent_company_news(company_symbol):
     )
 
 
-fetch_watchlist_companies()
+send_push_notification()
