@@ -29,6 +29,7 @@ psql -U riverfort -h localhost riverfort_notification
 ```
 cd riverfort-notification
 python3 database/create_schema.py
+python3 database/setup_exchanges.py
 python3 database/setup_companies.py
 ```
 
