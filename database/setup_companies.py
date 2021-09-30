@@ -13,7 +13,8 @@ with open("/Users/nieqiuyang/Desktop/lse_shares.csv", "r") as f:
         database.insert_data(
             """
             INSERT INTO companies (company_symbol, company_name, exchange) 
-            VALUES (%s, %s, %s)
+            VALUES (%s, %s, %s) 
+            RETURNING company_symbol
             """,
             (row[0], row[1], "LSE"),
         )
