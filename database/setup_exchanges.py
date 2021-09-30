@@ -12,5 +12,6 @@ for exchange in exchanges:
         """
         INSERT INTO exchanges (exchange) VALUES (%s)
         RETURNING exchange
-        """, (exchange,)
+        """,
+        (exchange,),
     )
