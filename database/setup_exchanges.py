@@ -8,11 +8,18 @@ database = DatabaseConnection(
 # Exchange naming references Yahoo Finance
 exchanges = ["London", "AQS"]
 
-for exchange in exchanges:
-    database.insert_data(
-        """
-        INSERT INTO exchanges (exchange) VALUES (%s)
-        RETURNING exchange
-        """,
-        (exchange,),
-    )
+
+def upsert_exchanges():
+    for exchange in exchanges:
+        database.insert_data(
+            """
+            INSERT INTO exchanges (exchange) VALUES (%s)
+            ON CONFLICT (exchange)
+            DO UPDATE SET exchange = EXCLUDED.exchange
+            RETURNING exchange
+            """,
+            (exchange,),
+        )
+
+
+upsert_exchanges()
