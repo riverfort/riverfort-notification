@@ -32,9 +32,10 @@ print("Creating table watchlist...")
 database.create_table(
     """
     CREATE TABLE IF NOT EXISTS watchlist (
+    watchlist_id SERIAL PRIMARY KEY,
     device_token VARCHAR(200) NOT NULL REFERENCES device_tokens (device_token) ON UPDATE CASCADE ON DELETE CASCADE, 
     company_symbol VARCHAR(200) NOT NULL REFERENCES companies (company_symbol) ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT watchlist_pkey PRIMARY KEY (device_token, company_symbol))
+    UNIQUE (device_token, company_symbol))
     """
 )
 
