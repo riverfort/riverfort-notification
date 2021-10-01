@@ -4,6 +4,7 @@ from company_news import (
     delete_recent_company_news,
     add_latest_news_to_db,
 )
+from watchlist import fetch_all_device_tokens_of, fetch_watchlist_companies
 import feedparser
 
 uk_news_url = "https://www.investegate.co.uk/Rss.aspx?company="
@@ -18,24 +19,10 @@ def send_push_notification():
         print("Send Push Notification to: " + device_token)
 
 
-def fetch_all_device_tokens_of(company_symbol):
-    device_tokens = database.filter_data(
-        "SELECT device_token FROM watchlist WHERE company_symbol=%s", (company_symbol,)
-    )
-    return [i[0] for i in device_tokens]
-
-
 def check_company_latest_news():
     company_symbols = fetch_watchlist_companies()
     for company_symbol in company_symbols:
         fetch_company_latest_news(company_symbol)
-
-
-def fetch_watchlist_companies():
-    company_symbols = database.select_data(
-        "SELECT DISTINCT company_symbol FROM watchlist"
-    )
-    return [i[0] for i in company_symbols]
 
 
 def fetch_company_latest_news(company_symbol):
