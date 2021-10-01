@@ -13,12 +13,6 @@ database = DatabaseConnection(
 )
 
 
-def send_push_notification():
-    device_tokens = fetch_all_device_tokens_of("RMM")
-    for device_token in device_tokens:
-        print("Send Push Notification to: " + device_token)
-
-
 def check_company_latest_news():
     company_symbols = fetch_watchlist_companies()
     for company_symbol in company_symbols:
@@ -36,6 +30,13 @@ def fetch_company_latest_news(company_symbol):
         print("breaking news! - " + company_symbol)
         delete_recent_company_news(company_symbol)
         add_latest_news_to_db(company_symbol, pub_date, title)
+        send_push_notification(company_symbol)
 
 
-send_push_notification()
+def send_push_notification(company_symbol):
+    device_tokens = fetch_all_device_tokens_of(company_symbol)
+    for device_token in device_tokens:
+        print("Send Push Notification to: " + device_token)
+
+
+check_company_latest_news()
