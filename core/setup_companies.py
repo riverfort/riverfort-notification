@@ -8,7 +8,7 @@ database = DatabaseConnection(
 
 
 def upsert_london_listed_companies():
-    with open("/Users/nieqiuyang/Desktop/lse_shares.csv", "r") as f:
+    with open("companies/lse_shares.csv", "r") as f:
         reader = csv.reader(f)
         next(reader)
         for row in reader:
