@@ -5,6 +5,8 @@ from company_news import (
     add_latest_news_to_db,
 )
 from watchlist import fetch_all_device_tokens_of, fetch_watchlist_companies
+import apns
+import asyncio
 import feedparser
 
 uk_news_url = "https://www.investegate.co.uk/Rss.aspx?company="
@@ -36,7 +38,8 @@ def fetch_company_latest_news(company_symbol):
 def send_push_notification(company_symbol):
     device_tokens = fetch_all_device_tokens_of(company_symbol)
     for device_token in device_tokens:
-        print("Send Push Notification to: " + device_token)
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(apns.run(device_token))
 
 
 check_company_latest_news()
