@@ -47,3 +47,18 @@ black .
   * Instrument list download: https://aquis-website-eu.s3.amazonaws.com/primary_aqse_summary_july_21.xls
   * The file seems updated monthly. [Link](https://www.aquis.eu/aquis-stock-exchange/for-investors/market-statistics-data)
   * Capture All AQSE securities.
+---
+## Troubleshooting
+```
+Error response from daemon: Ports are not available: listen tcp 0.0.0.0:5432: bind: address already in use
+```
+```
+sudo lsof -i :5432
+Password:
+COMMAND  PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+postgres  81 postgres    4u  IPv6 0xbeffef4510c29ae9      0t0  TCP *:postgresql (LISTEN)
+postgres  81 postgres    5u  IPv4 0xbeffef4510c31e51      0t0  TCP *:postgresql (LISTEN)
+```
+```
+sudo kill 81
+```
