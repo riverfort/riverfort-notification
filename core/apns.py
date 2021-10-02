@@ -13,6 +13,7 @@ apns = APNs(
 payload = {
     "aps": {
         "alert": "Hello from APNs",
+        "sound": "default",
         "badge": "1",
     }
 }
