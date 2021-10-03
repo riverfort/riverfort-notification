@@ -26,6 +26,8 @@ def fetch_company_latest_news(company_symbol):
     title = lateset_feed["title"]
     pub_date = lateset_feed["published"]
     link = lateset_feed["link"]
+    headline = lateset_feed["investegate_headline"]
+    company = lateset_feed["investegate_company"]
     if is_latest_news_in_db(company_symbol, pub_date):
         print("no news - " + company_symbol)
     else:
