@@ -32,14 +32,14 @@ def fetch_company_latest_news(company_symbol):
         print("breaking news! - " + company_symbol)
         delete_recent_company_news(company_symbol)
         add_latest_news_to_db(company_symbol, pub_date, title)
-        send_push_notification(company_symbol)
+        send_push_notification(company_symbol, title, link)
 
 
-def send_push_notification(company_symbol):
+def send_push_notification(company_symbol, title, link):
     device_tokens = fetch_all_device_tokens_of(company_symbol)
     for device_token in device_tokens:
         loop = asyncio.get_event_loop()
-        loop.run_until_complete(apns.run(device_token))
+        loop.run_until_complete(apns.run(device_token, company_symbol, title, link))
 
 
 check_company_latest_news()

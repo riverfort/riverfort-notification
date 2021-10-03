@@ -10,19 +10,25 @@ apns = APNs(
     use_sandbox=True,
 )
 
-payload = {
-    "aps": {
-        "alert": "Hello from APNs",
-        "sound": "default",
-        "badge": "1",
+
+def payload(company_symbol, title, link):
+    payload = {
+        "aps": {
+            "alert": {
+                "title": "{}: New Announcement".format(company_symbol),
+                "body": "{}".format(title),
+            },
+            "sound": "default",
+            "badge": "1",
+        }
     }
-}
+    return payload
 
 
-async def run(device_token):
+async def run(device_token, company_symbol, title, link):
     apns_key_client = apns
     request = NotificationRequest(
         device_token=device_token,
-        message=payload,
+        message=payload(company_symbol, title, link),
     )
     await apns_key_client.send_notification(request)
