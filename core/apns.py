@@ -22,8 +22,8 @@ def payload(company_news):
                 "body": "{}".format(company_news.headline),
             },
             "sound": "default",
-            "badge": "1",
-        }
+        },
+        "link": "{}".format(company_news.link)
     }
     return payload
 
