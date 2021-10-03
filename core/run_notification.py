@@ -3,6 +3,7 @@ from company_news import (
     is_latest_news_in_db,
     delete_recent_company_news,
     add_latest_news_to_db,
+    CompanyNews,
 )
 from watchlist import fetch_all_device_tokens_of, fetch_watchlist_companies
 import apns
@@ -23,25 +24,28 @@ def check_company_latest_news():
 
 def fetch_company_latest_news(company_symbol):
     lateset_feed = feedparser.parse(uk_news_url + company_symbol)["entries"][:1][0]
-    title = lateset_feed["title"]
-    pub_date = lateset_feed["published"]
-    link = lateset_feed["link"]
-    headline = lateset_feed["investegate_headline"]
-    company = lateset_feed["investegate_company"]
-    if is_latest_news_in_db(company_symbol, pub_date):
+    company_news = CompanyNews(
+        title=lateset_feed["title"],
+        company_symbol=company_symbol,
+        company_name=lateset_feed["investegate_company"],
+        headline=lateset_feed["investegate_headline"],
+        pub_date=lateset_feed["published"],
+        link=lateset_feed["link"],
+    )
+    if is_latest_news_in_db(company_symbol, company_news.pub_date):
         print("no news - " + company_symbol)
     else:
         print("breaking news! - " + company_symbol)
         delete_recent_company_news(company_symbol)
-        add_latest_news_to_db(company_symbol, pub_date, title)
-        send_push_notification(company_symbol, title, link)
+        add_latest_news_to_db(company_symbol, company_news.pub_date, company_news.title)
+        send_push_notification(company_symbol, company_news)
 
 
-def send_push_notification(company_symbol, title, link):
+def send_push_notification(company_symbol, company_news):
     device_tokens = fetch_all_device_tokens_of(company_symbol)
     for device_token in device_tokens:
         loop = asyncio.get_event_loop()
-        loop.run_until_complete(apns.run(device_token, company_symbol, title, link))
+        loop.run_until_complete(apns.run(device_token, company_news))
 
 
 check_company_latest_news()
