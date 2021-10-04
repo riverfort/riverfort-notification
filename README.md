@@ -57,6 +57,14 @@ black .
     "link": "https://www.investegate.co.uk/article.aspx?id=202110010700076905N"
 }
 ```
+---
+## Cron
+```
+crontab -e
+```
+```
+*/15 06-19 * * * bash notification.sh
+```
 
 ---
 ## Company list
