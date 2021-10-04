@@ -37,6 +37,27 @@ python3 core/setup_companies.py
 ```
 black .
 ```
+
+## APNs payload example
+```JSON
+{
+    "aps": {
+        "alert": {
+            "title": "New Announcement",
+            "subtitle": "Rambler Metals and Mining PLC (RMM.L)",
+            "body": "Update on Financing",
+        },
+        "sound": "default",
+    },
+    "company": {
+        "symbol": "RMM",
+        "name": "Rambler Metals and Mining PLC",
+        "exchange": "London",
+    },
+    "link": "https://www.investegate.co.uk/article.aspx?id=202110010700076905N"
+}
+```
+
 ---
 ## Company list
 ### London
@@ -47,6 +68,7 @@ black .
   * Instrument list download: https://aquis-website-eu.s3.amazonaws.com/primary_aqse_summary_july_21.xls
   * The file seems updated monthly. [Link](https://www.aquis.eu/aquis-stock-exchange/for-investors/market-statistics-data)
   * Capture All AQSE securities.
+
 ---
 ## Troubleshooting
 ```
