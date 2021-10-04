@@ -7,7 +7,7 @@ apns = APNs(
     key_id="58M45W44RZ",
     team_id="A8X2W38P62",
     topic="com.RiverFort",  # Bundle ID
-    use_sandbox=True,
+    use_sandbox=False,
 )
 
 
