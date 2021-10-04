@@ -45,14 +45,14 @@ black .
         "alert": {
             "title": "New Announcement",
             "subtitle": "Rambler Metals and Mining PLC (RMM.L)",
-            "body": "Update on Financing",
+            "body": "Update on Financing"
         },
-        "sound": "default",
+        "sound": "default"
     },
     "company": {
         "symbol": "RMM",
         "name": "Rambler Metals and Mining PLC",
-        "exchange": "London",
+        "exchange": "London"
     },
     "link": "https://www.investegate.co.uk/article.aspx?id=202110010700076905N"
 }
