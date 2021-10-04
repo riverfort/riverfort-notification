@@ -58,6 +58,7 @@ def send_push_notification(company_symbol, company_news):
     if is_news_today(company_news.pub_date):
         device_tokens = fetch_all_device_tokens_of(company_symbol)
         for device_token in device_tokens:
+            print(f"Send notifications to {device_token}")
             loop = asyncio.get_event_loop()
             loop.run_until_complete(apns.run(device_token, company_news))
 
