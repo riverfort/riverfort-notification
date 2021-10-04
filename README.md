@@ -63,7 +63,7 @@ black .
 crontab -e
 ```
 ```
-*/15 06-19 * * * bash notification.sh
+*/15 06-19 * * * bash riverfort-notification/notification.sh
 ```
 
 ---
