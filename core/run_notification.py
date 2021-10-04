@@ -5,6 +5,7 @@ from company_news import (
     add_latest_news_to_db,
     CompanyNews,
 )
+from companies import fetch_exchange_of_company
 from watchlist import fetch_all_device_tokens_of, fetch_watchlist_companies
 import apns
 import asyncio
@@ -23,11 +24,13 @@ def check_company_latest_news():
 
 
 def fetch_company_latest_news(company_symbol):
+    exchange = fetch_exchange_of_company(company_symbol)
     lateset_feed = feedparser.parse(uk_news_url + company_symbol)["entries"][:1][0]
     company_news = CompanyNews(
         title=lateset_feed["title"],
         company_symbol=company_symbol,
         company_name=lateset_feed["investegate_company"],
+        exchange=exchange,
         headline=lateset_feed["investegate_headline"],
         pub_date=lateset_feed["published"],
         link=lateset_feed["link"],
