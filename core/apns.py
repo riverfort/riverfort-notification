@@ -23,7 +23,7 @@ def payload(company_news):
             },
             "sound": "default",
         },
-        "link": "{}".format(company_news.link)
+        "link": "{}".format(company_news.link),
     }
     return payload
 
