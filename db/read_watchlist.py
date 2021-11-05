@@ -1,6 +1,6 @@
-from db.db import DB
+from db.conn import Conn
 
-db = DB(
+conn = Conn(
     host="localhost",
     port=5432,
     database="riverfort_notification",
@@ -10,7 +10,7 @@ db = DB(
 
 
 def get_device_tokens_of(company_symbol):
-    device_tokens = db.get(
+    device_tokens = conn.get(
         "SELECT device_token FROM watchlist WHERE company_symbol=%s", company_symbol
     )
     result = [device_token[0] for device_token in device_tokens]
@@ -18,6 +18,6 @@ def get_device_tokens_of(company_symbol):
 
 
 def get_companies():
-    companies = db.get("SELECT DISTINCT company_symbol FROM watchlist")
+    companies = conn.get("SELECT DISTINCT company_symbol FROM watchlist")
     result = [company[0] for company in companies]
     return result

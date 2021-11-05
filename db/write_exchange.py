@@ -1,6 +1,6 @@
-from db.db import DB
+from db.conn import Conn
 
-db = DB(
+conn = Conn(
     host="localhost",
     port=5432,
     database="riverfort_notification",
@@ -11,7 +11,7 @@ db = DB(
 exchanges = ["London", "AQS"]
 
 for exchange in exchanges:
-    db.write(
+    conn.write(
         """
         INSERT INTO exchanges (exchange) VALUES (%s)
         ON CONFLICT (exchange)
@@ -21,4 +21,4 @@ for exchange in exchanges:
         exchange,
     )
 
-db.close()
+conn.close()

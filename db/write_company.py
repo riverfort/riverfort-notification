@@ -1,7 +1,7 @@
-from db.db import DB
+from db.conn import Conn
 import csv
 
-db = DB(
+conn = Conn(
     host="localhost",
     port=5432,
     database="riverfort_notification",
@@ -14,7 +14,7 @@ reader = csv.reader(csvfile)
 for row in reader:
     company_symbol = row[0]
     company_name = row[1]
-    db.write(
+    conn.write(
         """
         INSERT INTO companies (company_symbol, company_name, exchange) 
         VALUES (%s, %s, 'London')
@@ -26,4 +26,4 @@ for row in reader:
         company_name,
     )
 
-db.close()
+conn.close()

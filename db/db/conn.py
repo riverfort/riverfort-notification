@@ -1,9 +1,9 @@
 import psycopg2
 
 
-class DB:
+class Conn:
     def __init__(self, host, port, database, user, password):
-        self._con = psycopg2.connect(
+        self._conn = psycopg2.connect(
             host=host,
             port=port,
             database=database,
@@ -12,18 +12,18 @@ class DB:
         )
 
     def close(self):
-        self._con.close()
+        self._conn.close()
 
     def get(self, sql, *args):
-        cur = self._con.cursor()
+        cur = self._conn.cursor()
         cur.execute(sql, args)
         result = cur.fetchall()
         cur.close
         return result
 
     def write(self, sql, *args):
-        cur = self._con.cursor()
+        cur = self._conn.cursor()
         cur.execute(sql, args)
         print(cur.statusmessage)
-        self._con.commit()
+        self._conn.commit()
         cur.close

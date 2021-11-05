@@ -1,6 +1,6 @@
-from db.db import DB
+from db.conn import Conn
 
-db = DB(
+conn = Conn(
     host="localhost",
     port=5432,
     database="riverfort_notification",
@@ -8,11 +8,11 @@ db = DB(
     password="rgctechnology",
 )
 
-db.write(
+conn.write(
     "CREATE TABLE IF NOT EXISTS device_tokens (device_token VARCHAR(200) PRIMARY KEY)"
 )
-db.write("CREATE TABLE IF NOT EXISTS exchanges (exchange VARCHAR(200) PRIMARY KEY)")
-db.write(
+conn.write("CREATE TABLE IF NOT EXISTS exchanges (exchange VARCHAR(200) PRIMARY KEY)")
+conn.write(
     """
     CREATE TABLE IF NOT EXISTS companies (
     company_symbol VARCHAR(200) PRIMARY KEY,
@@ -20,7 +20,7 @@ db.write(
     exchange VARCHAR(200) NOT NULL REFERENCES exchanges (exchange) ON UPDATE CASCADE ON DELETE CASCADE)
     """
 )
-db.write(
+conn.write(
     """
     CREATE TABLE IF NOT EXISTS watchlist (
     watchlist_id SERIAL PRIMARY KEY,
@@ -29,7 +29,7 @@ db.write(
     UNIQUE (device_token, company_symbol))
     """
 )
-db.write(
+conn.write(
     """
     CREATE TABLE IF NOT EXISTS company_news (
     company_symbol VARCHAR(200) REFERENCES companies (company_symbol),
@@ -39,4 +39,4 @@ db.write(
     """
 )
 
-db.close()
+conn.close()
