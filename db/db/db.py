@@ -14,9 +14,9 @@ class DB:
     def close(self):
         self._con.close()
 
-    def get(self, sql):
+    def get(self, sql, *args):
         cur = self._con.cursor()
-        cur.execute(sql)
+        cur.execute(sql, args)
         result = cur.fetchall()
         cur.close
         return result
