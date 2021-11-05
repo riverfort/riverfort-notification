@@ -9,7 +9,7 @@ conn = Conn(
     password="rgctechnology",
 )
 
-csvfile = open("companies_data_source/lse_shares.csv", "r")
+csvfile = open("datasource/lse_shares.csv", "r")
 reader = csv.reader(csvfile)
 for row in reader:
     company_symbol = row[0]
