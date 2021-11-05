@@ -1,3 +1,0 @@
-```
-DROP OWNED BY riverfort;
-```
