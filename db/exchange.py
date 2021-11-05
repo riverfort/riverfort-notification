@@ -18,7 +18,7 @@ for exchange in exchanges:
         DO UPDATE SET exchange = EXCLUDED.exchange
         RETURNING exchange
         """,
-        (exchange,),
+        exchange,
     )
 
 db.close()
