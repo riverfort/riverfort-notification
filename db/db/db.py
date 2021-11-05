@@ -21,9 +21,9 @@ class DB:
         cur.close
         return result
 
-    def write(self, sql):
+    def write(self, sql, *args):
         cur = self._con.cursor()
-        cur.execute(sql)
+        cur.execute(sql, args)
         print(cur.statusmessage)
         self._con.commit()
         cur.close
