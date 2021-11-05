@@ -28,9 +28,9 @@ psql -U riverfort -h localhost riverfort_notification
 ```
 ```
 cd riverfort-notification
-python3 core/create_schema.py
-python3 core/setup_exchanges.py
-python3 core/setup_companies.py
+python3 db/schema.py
+python3 db/exchange.py
+python3 db/company.py
 ```
 
 ## Apply formatting
