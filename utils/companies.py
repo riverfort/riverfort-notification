@@ -4,7 +4,7 @@ def get_company_symbols(conn):
     return result
 
 
-def get_companys_exchange(conn, company_symbol):
+def get_exchange(conn, company_symbol):
     exchange = conn.get(
         "SELECT exchange FROM companies WHERE company_symbol=%s", company_symbol
     )

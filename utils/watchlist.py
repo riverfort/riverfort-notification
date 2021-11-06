@@ -6,7 +6,7 @@ def get_device_tokens_of(conn, company_symbol):
     return result
 
 
-def get_companies(conn):
+def get_company_symbols(conn):
     companies = conn.get("SELECT DISTINCT company_symbol FROM watchlist")
     result = [company[0] for company in companies]
     return result
