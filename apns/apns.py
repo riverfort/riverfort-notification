@@ -11,19 +11,19 @@ apns = APNs(
 )
 
 
-def payload(company_news):
+def payload(companyNews):
     payload = {
         "aps": {
             "alert": {
                 "title": "New Announcement",
                 "subtitle": "{} ({})".format(
-                    company_news.company_name, company_news.company_symbol
+                    companyNews.company_name, companyNews.company_symbol
                 ),
-                "body": "{}".format(company_news.headline),
+                "body": "{}".format(companyNews.headline),
             },
             "sound": "default",
         },
-        "link": "{}".format(company_news.link),
+        "link": "{}".format(companyNews.link),
     }
     return payload
 

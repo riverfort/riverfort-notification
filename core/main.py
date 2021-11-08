@@ -65,7 +65,7 @@ for company_symbol in watchlist_company_symbols:
             for device_token in device_tokens:
                 print(f"INFO: sending notifications to {device_token}")
                 loop = asyncio.get_event_loop()
-                loop.run_until_complete(apns.run(device_token, company_news))
+                loop.run_until_complete(apns.run(device_token, companyNews))
 
 
 conn.close()
