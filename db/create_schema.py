@@ -38,5 +38,15 @@ conn.write(
     PRIMARY KEY (company_symbol, pub_date))
     """
 )
+conn.write(
+    """
+    CREATE TABLE IF NOT EXISTS company_quotes (
+    company_symbol VARCHAR(200) REFERENCES companies (company_symbol),
+    price NUMERIC,
+    change NUMERIC,
+    change_percent NUMERIC,
+    PRIMARY KEY (company_symbol))
+    """
+)
 
 conn.close()
