@@ -10,7 +10,7 @@ source venv/bin/activate
 ## Install
 ```
 cd riverfort-notification
-pip install -r requirements.txt
+pip install -r requirements.txt --no-cache-dir
 ```
 
 ## Setup database [container](https://github.com/bitnami/bitnami-docker-postgresql)
@@ -63,7 +63,7 @@ black .
 crontab -e
 ```
 ```
-*/15 06-19 * * * bash riverfort-notification/notification.sh
+*/20 06-19 * * 1-5 bash riverfort-notification/notification.sh
 ```
 
 ---
