@@ -29,8 +29,3 @@ def get_companys_quote(symbols: List[str]) -> List[CompanyQuote]:
         )
         result.append(companyQuote)
     return result
-
-
-result = get_companys_quote([])
-for r in result:
-    print(r)
