@@ -1,25 +1,18 @@
-from db_config.connection import DatabaseConnection
+from db.conn import Conn
 
-
-database = DatabaseConnection(
-    "riverfort_notification", "riverfort", "rgctechnology", "localhost", 5432
+conn = Conn(
+    host="localhost",
+    port=5432,
+    database="riverfort_notification",
+    user="riverfort",
+    password="rgctechnology",
 )
 
-print("Creating table device_tokens...")
-database.create_table(
+conn.write(
     "CREATE TABLE IF NOT EXISTS device_tokens (device_token VARCHAR(200) PRIMARY KEY)"
 )
-
-print("Creating table exchanges...")
-database.create_table(
-    """
-    CREATE TABLE IF NOT EXISTS exchanges 
-    (exchange VARCHAR(200) PRIMARY KEY)
-    """
-)
-
-print("Creating table companies...")
-database.create_table(
+conn.write("CREATE TABLE IF NOT EXISTS exchanges (exchange VARCHAR(200) PRIMARY KEY)")
+conn.write(
     """
     CREATE TABLE IF NOT EXISTS companies (
     company_symbol VARCHAR(200) PRIMARY KEY,
@@ -27,9 +20,7 @@ database.create_table(
     exchange VARCHAR(200) NOT NULL REFERENCES exchanges (exchange) ON UPDATE CASCADE ON DELETE CASCADE)
     """
 )
-
-print("Creating table watchlist...")
-database.create_table(
+conn.write(
     """
     CREATE TABLE IF NOT EXISTS watchlist (
     watchlist_id SERIAL PRIMARY KEY,
@@ -38,9 +29,7 @@ database.create_table(
     UNIQUE (device_token, company_symbol))
     """
 )
-
-print("Creating table company_news...")
-database.create_table(
+conn.write(
     """
     CREATE TABLE IF NOT EXISTS company_news (
     company_symbol VARCHAR(200) REFERENCES companies (company_symbol),
@@ -49,3 +38,5 @@ database.create_table(
     PRIMARY KEY (company_symbol, pub_date))
     """
 )
+
+conn.close()
