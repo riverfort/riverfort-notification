@@ -1,24 +1,17 @@
 import requests
+import os
+import sys
+import inspect
+from typing import List
+
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0, parentdir)
+
+from models.company_quote import CompanyQuote
 
 
-class CompanyQuote:
-    def __init__(self, company_symbol, price, change, change_percent):
-        super().__init__()
-        self.company_symbol = company_symbol
-        self.price = price
-        self.change = change
-        self.change_percent = change_percent
-
-    def __str__(self):
-        return f"""CompanyQuote: 
-        - company_symbol: {self.company_symbol}
-        - price: {self.price}
-        - change: {self.change}
-        - change_percent: {self.change_percent}
-        """
-
-
-def get_companys_quote(symbols):
+def get_companys_quote(symbols: List[str]) -> List[CompanyQuote]:
     payload = {"symbols": ",".join(symbols)}
     r = requests.get(
         f"https://query2.finance.yahoo.com/v7/finance/quote",
@@ -38,6 +31,6 @@ def get_companys_quote(symbols):
     return result
 
 
-result = get_companys_quote([""])
+result = get_companys_quote([])
 for r in result:
     print(r)
