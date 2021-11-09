@@ -2,7 +2,6 @@ import requests
 import os
 import sys
 import inspect
-from typing import List
 
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -11,21 +10,23 @@ sys.path.insert(0, parentdir)
 from models.company_quote import CompanyQuote
 
 
-def get_companys_quote(symbols: List[str]) -> List[CompanyQuote]:
-    payload = {"symbols": ",".join(symbols)}
+def get_company_quote(symbol: str) -> CompanyQuote:
+    payload = {"modules": "price"}
     r = requests.get(
-        f"https://query2.finance.yahoo.com/v7/finance/quote",
+        f"https://query2.finance.yahoo.com/v10/finance/quoteSummary/{symbol}",
         params=payload,
         headers={"User-agent": "Mozilla/5.0"},
     )
-    quotes = r.json()["quoteResponse"]["result"]
-    result = []
-    for quote in quotes:
+    result = r.json()["quoteSummary"]["result"]
+    if result is not None and result:
+        price_module = result[0]["price"]
+        price = price_module["regularMarketPrice"]["fmt"]
+        change = price_module["regularMarketChange"]["fmt"]
+        change_percent = price_module["regularMarketChangePercent"]["fmt"]
         companyQuote = CompanyQuote(
-            company_symbol=quote["symbol"].split(".")[0],
-            price=quote["regularMarketPrice"],
-            change=quote["regularMarketChange"],
-            change_percent=quote["regularMarketChangePercent"],
+            company_symbol=symbol,
+            price=price,
+            change=change,
+            change_percent=change_percent,
         )
-        result.append(companyQuote)
-    return result
+        return companyQuote
