@@ -44,7 +44,7 @@ conn.write(
     company_symbol VARCHAR(200) REFERENCES companies (company_symbol),
     price NUMERIC,
     change NUMERIC,
-    change_percent NUMERIC,
+    change_percent VARCHAR(200),
     PRIMARY KEY (company_symbol))
     """
 )
