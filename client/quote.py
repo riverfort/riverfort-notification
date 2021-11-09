@@ -23,32 +23,32 @@ def get_company_quote(symbol: str) -> CompanyQuote:
 
         if (
             "regularMarketPrice" in price_module
-            and "fmt" in price_module["regularMarketPrice"]
+            and "raw" in price_module["regularMarketPrice"]
         ):
-            fmt_price = price_module["regularMarketPrice"]["fmt"]
+            raw_price = price_module["regularMarketPrice"]["raw"]
         else:
-            fmt_price = None
+            raw_price = None
 
         if (
             "regularMarketChange" in price_module
-            and "fmt" in price_module["regularMarketChange"]
+            and "raw" in price_module["regularMarketChange"]
         ):
-            fmt_change = price_module["regularMarketChange"]["fmt"]
+            raw_change = price_module["regularMarketChange"]["raw"]
         else:
-            fmt_change = None
+            raw_change = None
 
         if (
             "regularMarketChangePercent" in price_module
-            and "fmt" in price_module["regularMarketChangePercent"]
+            and "raw" in price_module["regularMarketChangePercent"]
         ):
-            fmt_change_percent = price_module["regularMarketChangePercent"]["fmt"]
+            raw_change_percent = price_module["regularMarketChangePercent"]["raw"]
         else:
-            fmt_change_percent = None
+            raw_change_percent = None
 
         companyQuote = CompanyQuote(
             company_symbol=symbol,
-            price=fmt_price,
-            change=fmt_change,
-            change_percent=fmt_change_percent,
+            price=raw_price,
+            change=raw_change,
+            change_percent=raw_change_percent,
         )
         return companyQuote
