@@ -1,6 +1,16 @@
 # riverfort-notification
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
+## Setup env (bash)
+```
+nano .bash_profile
+```
+```
+# riverfort-notification env
+export EMAIL_USER=
+export EMAIL_PASS=
+```
+
 ## Setup virtual environment
 ```
 python3 -m venv venv
