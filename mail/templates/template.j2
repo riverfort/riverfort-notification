@@ -5,6 +5,11 @@
 </head>
 <body>
 
+    <ul id="navigation">
+    {% for company_quote in company_quotes %}
+        <li>{{ company_quote.company_symbol }} - {{ company_quote.price }}</li>
+    {% endfor %}
+    </ul>
 
     <h1>My Webpage</h1>
     {{ item1 }}
