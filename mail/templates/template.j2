@@ -41,7 +41,11 @@
                 <td>{{ company_quote.company_symbol }}</td>
                 <td>{{ company_quote.company_name }}</td>
                 <td>{{ "{:.2f}".format(company_quote.price) }}</td>
-                <td>{{ "{:.2f}".format(company_quote.change) }}</td>
+                <td>
+                    <span{% if (company_quote.change >= 0) %} style="color: green" {% else %} style="color: red" {% endif %}>
+                        {{ "{:.2f}".format(company_quote.change) }}
+                    </span>
+                </td>
                 <td>{{ "{:.2f}".format(company_quote.change_percent * 100) }}%</td>
             </tr>
         {% endfor %}

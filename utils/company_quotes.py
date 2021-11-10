@@ -14,7 +14,7 @@ def get_top_gain_company_quotes(conn) -> CompanyQuote:
         """
         SELECT CQS.company_symbol, company_name, price, change, change_percent 
         FROM company_quotes CQS INNER JOIN companies CS ON CQS.company_symbol=CS.company_symbol
-        WHERE change_percent IS NOT NULL ORDER BY change_percent DESC LIMIT 30
+        WHERE change_percent IS NOT NULL ORDER BY change_percent DESC LIMIT 100
         """
     )
     result = list(
