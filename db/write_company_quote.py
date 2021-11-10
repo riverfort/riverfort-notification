@@ -28,16 +28,17 @@ for symbol in company_symbols_fmt:
     if companyQuote is not None:
         conn.write(
             """
-            INSERT INTO company_quotes (company_symbol, price, change, change_percent)
-            VALUES (%s, %s, %s, %s) 
+            INSERT INTO company_quotes (company_symbol, price, change, change_percent, market_time)
+            VALUES (%s, %s, %s, %s, %s) 
             ON CONFLICT (company_symbol) DO UPDATE SET 
-            (price, change, change_percent) = (EXCLUDED.price, EXCLUDED.change, EXCLUDED.change_percent)
+            (price, change, change_percent, market_time) = (EXCLUDED.price, EXCLUDED.change, EXCLUDED.change_percent, EXCLUDED.market_time)
             RETURNING company_symbol
             """,
             companyQuote.company_symbol.split(".")[0],
             companyQuote.price,
             companyQuote.change,
             companyQuote.change_percent,
+            companyQuote.market_time,
         )
 
 conn.close()

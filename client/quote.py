@@ -45,10 +45,16 @@ def get_company_quote(symbol: str) -> CompanyQuote:
         else:
             raw_change_percent = None
 
+        if "regularMarketTime" in price_module:
+            market_time = price_module["regularMarketTime"]
+        else:
+            market_time = None
+
         companyQuote = CompanyQuote(
             company_symbol=symbol,
             price=raw_price,
             change=raw_change,
             change_percent=raw_change_percent,
+            market_time=market_time,
         )
         return companyQuote

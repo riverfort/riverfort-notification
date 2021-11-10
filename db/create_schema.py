@@ -45,6 +45,7 @@ conn.write(
     price NUMERIC,
     change NUMERIC,
     change_percent NUMERIC,
+    market_time NUMERIC,
     PRIMARY KEY (company_symbol))
     """
 )
