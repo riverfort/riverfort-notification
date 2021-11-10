@@ -10,7 +10,9 @@ h2==4.0.0
 hpack==4.0.0
 hyperframe==6.0.1
 idna==3.3
+Jinja2==3.0.3
 logger==1.4
+MarkupSafe==2.0.1
 mypy-extensions==0.4.3
 pathspec==0.9.0
 platformdirs==2.4.0
