@@ -13,6 +13,6 @@ from mail.mail import send_email
 item1 = "hello"
 item2 = "world"
 
-# generate HTML from template
+contacts = ["tech@riverfortcapital.com", "qyang.nie@gmail.com"]
 html = render_template("templates/template.j2", **locals())
-send_email(html=html)
+send_email(subject="Top Gainers: London", contacts=contacts, content="Hello", html=html)
