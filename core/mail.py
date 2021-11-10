@@ -14,5 +14,5 @@ item1 = "hello"
 item2 = "world"
 
 contacts = ["tech@riverfortcapital.com", "qyang.nie@gmail.com"]
-html = render_template("templates/template.j2", **locals())
+html = render_template("mail/templates/template.j2", **locals())
 send_email(subject="Top Gainers: London", contacts=contacts, content="Hello", html=html)
