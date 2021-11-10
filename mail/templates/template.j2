@@ -2,19 +2,47 @@
 <html lang="en">
 <head>
     <title>My Webpage</title>
+    <style>
+    #company-quotes {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    #company-quotes td, #company-quotes th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    }
+
+    #company-quotes tr:nth-child(even){background-color: #f2f2f2;}
+
+    #company-quotes tr:hover {background-color: #ddd;}
+
+    #company-quotes th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+    }
+    </style>
 </head>
 <body>
-
-    <ul id="navigation">
-    {% for company_quote in company_quotes %}
-        <li>{{ company_quote.company_symbol }} - {{ company_quote.price }}</li>
-    {% endfor %}
-    </ul>
-
-    <h1>My Webpage</h1>
-    {{ item1 }}
-    {{ item2 }}
-
-    {# a comment #}
+    <table id="company-quotes">
+        <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Change %</th>
+        </tr>
+        {% for company_quote in company_quotes %}
+            <tr>
+                <td>{{ company_quote.company_symbol }}</td>
+                <td>{{ "{:.2f}".format(company_quote.price) }}</td>
+                <td>{{ "{:.2f}".format(company_quote.change) }}</td>
+                <td>{{ "{:.2f}".format(company_quote.change_percent * 100) }}%</td>
+            </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
