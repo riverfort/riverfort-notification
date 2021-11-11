@@ -21,12 +21,8 @@ conn = Conn(
 
 company_quotes = get_top_gain_company_quotes(conn=conn)
 
-
-item1 = "hello"
-item2 = "world"
-
 contacts = ["tech@riverfortcapital.com", "qyang.nie@gmail.com"]
 html = render_template("mail/templates/template.j2", **locals())
-send_email(subject="Top Gainers: London", contacts=contacts, content="Hello", html=html)
+send_email(subject="Top Gainers: London", contacts=contacts, content="", html=html)
 
 conn.close()
