@@ -12,9 +12,11 @@ from models.company_quote import CompanyQuote
 def get_top_gain_company_quotes(conn) -> CompanyQuote:
     company_quotes = conn.get(
         """
-        SELECT CQS.company_symbol, price, change, change_percent, market_time
+        SELECT CQS.company_symbol, price, change, change_percent, TO_TIMESTAMP(market_time)
         FROM company_quotes CQS INNER JOIN companies CS ON CQS.company_symbol=CS.company_symbol
-        WHERE change_percent IS NOT NULL ORDER BY change_percent DESC LIMIT 100
+        WHERE change_percent IS NOT NULL 
+        AND TO_TIMESTAMP(market_time)::DATE=CURRENT_DATE 
+        ORDER BY change_percent DESC LIMIT 100
         """
     )
     result = list(
