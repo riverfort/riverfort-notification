@@ -67,6 +67,13 @@ black .
     "link": "https://www.investegate.co.uk/article.aspx?id=202110010700076905N"
 }
 ```
+
+## Add emails.txt
+```
+xxx@xxx.com
+yyy@yyy.com
+
+```
 ---
 ## Cron
 ```
