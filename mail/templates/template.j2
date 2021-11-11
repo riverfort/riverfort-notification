@@ -46,7 +46,7 @@
                     </span>
                 </td>
                 <td>{{ "{:.2f}".format(company_quote.change_percent * 100) }}%</td>
-                <td>{{ company_quote.market_time.strftime("%d/%m/%Y, %H:%M:%S") }}</td>
+                <td>{{ company_quote.market_time.strftime("%H:%M:%S, %d/%m/%Y") }}</td>
             </tr>
         {% endfor %}
     </table>

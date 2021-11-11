@@ -17,44 +17,48 @@ def get_company_quote(symbol: str) -> CompanyQuote:
         params=payload,
         headers={"User-agent": "Mozilla/5.0"},
     )
-    result = r.json()["quoteSummary"]["result"]
-    if result is not None and result:
-        price_module = result[0]["price"]
+    try:
+        result = r.json()["quoteSummary"]["result"]
+        if result is not None and result:
+            price_module = result[0]["price"]
 
-        if (
-            "regularMarketPrice" in price_module
-            and "raw" in price_module["regularMarketPrice"]
-        ):
-            raw_price = price_module["regularMarketPrice"]["raw"]
-        else:
-            raw_price = None
+            if (
+                "regularMarketPrice" in price_module
+                and "raw" in price_module["regularMarketPrice"]
+            ):
+                raw_price = price_module["regularMarketPrice"]["raw"]
+            else:
+                raw_price = None
 
-        if (
-            "regularMarketChange" in price_module
-            and "raw" in price_module["regularMarketChange"]
-        ):
-            raw_change = price_module["regularMarketChange"]["raw"]
-        else:
-            raw_change = None
+            if (
+                "regularMarketChange" in price_module
+                and "raw" in price_module["regularMarketChange"]
+            ):
+                raw_change = price_module["regularMarketChange"]["raw"]
+            else:
+                raw_change = None
 
-        if (
-            "regularMarketChangePercent" in price_module
-            and "raw" in price_module["regularMarketChangePercent"]
-        ):
-            raw_change_percent = price_module["regularMarketChangePercent"]["raw"]
-        else:
-            raw_change_percent = None
+            if (
+                "regularMarketChangePercent" in price_module
+                and "raw" in price_module["regularMarketChangePercent"]
+            ):
+                raw_change_percent = price_module["regularMarketChangePercent"]["raw"]
+            else:
+                raw_change_percent = None
 
-        if "regularMarketTime" in price_module:
-            market_time = price_module["regularMarketTime"]
-        else:
-            market_time = None
+            if "regularMarketTime" in price_module:
+                market_time = price_module["regularMarketTime"]
+            else:
+                market_time = None
 
-        companyQuote = CompanyQuote(
-            company_symbol=symbol,
-            price=raw_price,
-            change=raw_change,
-            change_percent=raw_change_percent,
-            market_time=market_time,
-        )
-        return companyQuote
+            companyQuote = CompanyQuote(
+                company_symbol=symbol,
+                price=raw_price,
+                change=raw_change,
+                change_percent=raw_change_percent,
+                market_time=market_time,
+            )
+            return companyQuote
+    except:
+        print(f"ERROR: get company quote: {symbol}")
+        return
