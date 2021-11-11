@@ -1,6 +1,7 @@
 import os
 import sys
 import inspect
+import traceback
 
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -21,7 +22,13 @@ conn = Conn(
 
 company_quotes = get_top_gain_company_quotes(conn=conn)
 
-contacts = ["tech@riverfortcapital.com", "qyang.nie@gmail.com"]
+try:
+    with open("email.txt") as f:
+        contacts = f.read().splitlines()
+except:
+    traceback.print_exc()
+    sys.exit()
+
 html = render_template("mail/templates/template.j2", **locals())
 send_email(subject="Top Gainers: London", contacts=contacts, content="", html=html)
 
