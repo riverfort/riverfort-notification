@@ -59,6 +59,6 @@ def get_company_quote(symbol: str) -> CompanyQuote:
                 market_time=market_time,
             )
             return companyQuote
-    except:
-        print(f"ERROR: get company quote: {symbol}")
+    except Exception as e:
+        print(f"ERROR: get company quote: {symbol}: {e}")
         return
