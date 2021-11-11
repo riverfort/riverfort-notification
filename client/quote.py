@@ -61,5 +61,6 @@ def get_company_quote(symbol: str) -> CompanyQuote:
             )
             return companyQuote
     except Exception:
-        print(f"ERROR: get company quote: {symbol}: {traceback.print_exc()}")
+        print(f"ERROR: get company quote: {symbol}")
+        traceback.print_exc()
         return
