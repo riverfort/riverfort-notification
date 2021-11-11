@@ -1,4 +1,5 @@
 import requests
+import traceback
 import os
 import sys
 import inspect
@@ -59,6 +60,6 @@ def get_company_quote(symbol: str) -> CompanyQuote:
                 market_time=market_time,
             )
             return companyQuote
-    except Exception as e:
-        print(f"ERROR: get company quote: {symbol}: {e}")
+    except Exception:
+        print(f"ERROR: get company quote: {symbol}: {traceback.print_exc()}")
         return
