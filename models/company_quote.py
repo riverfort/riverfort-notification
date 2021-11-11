@@ -1,5 +1,13 @@
 class CompanyQuote:
-    def __init__(self, company_symbol, price, change, change_percent, market_time, company_name=None):
+    def __init__(
+        self,
+        company_symbol,
+        price,
+        change,
+        change_percent,
+        market_time,
+        company_name=None,
+    ):
         super().__init__()
         self.company_symbol = company_symbol
         self.company_name = company_name
