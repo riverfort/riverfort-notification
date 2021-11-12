@@ -1,6 +1,16 @@
 # riverfort-notification
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
+## Setup env (bash)
+```
+nano .bash_profile
+```
+```
+# riverfort-notification env
+export EMAIL_USER=
+export EMAIL_PASS=
+```
+
 ## Setup virtual environment
 ```
 python3 -m venv venv
@@ -57,6 +67,13 @@ black .
     "link": "https://www.investegate.co.uk/article.aspx?id=202110010700076905N"
 }
 ```
+
+## Add emails.txt
+```
+xxx@xxx.com
+yyy@yyy.com
+
+```
 ---
 ## Cron
 ```
@@ -64,6 +81,7 @@ crontab -e
 ```
 ```
 */20 06-19 * * 1-5 bash riverfort-notification/notification.sh
+0 12 * * 1-5 bash riverfort-notification/mail.sh
 ```
 
 ---

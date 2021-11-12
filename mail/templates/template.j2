@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Webpage</title>
+    <style>
+    #company-quotes {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    #company-quotes td, #company-quotes th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    }
+
+    #company-quotes tr:nth-child(even){background-color: #f2f2f2;}
+
+    #company-quotes tr:hover {background-color: #ddd;}
+
+    #company-quotes th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+    }
+    </style>
+</head>
+<body>
+    <h4>Market Date: {{ company_quotes[0].market_time.strftime("%d/%m/%Y") }}</h4>
+    <table id="company-quotes">
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Change %</th>
+            <th>Time</th>
+        </tr>
+        {% for company_quote in company_quotes %}
+            <tr>
+                <td>{{ company_quote.company_symbol }}</td>
+                <td>{{ company_quote.company_name }}</td>
+                <td>{{ "{:.2f}".format(company_quote.price) }}</td>
+                <td>
+                    <span{% if (company_quote.change >= 0) %} style="color: green" {% else %} style="color: red" {% endif %}>
+                        {{ "{:.2f}".format(company_quote.change) }}
+                    </span>
+                </td>
+                <td>{{ "{:.2f}".format(company_quote.change_percent * 100) }}%</td>
+                <td>{{ company_quote.market_time.strftime("%H:%M:%S") }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
