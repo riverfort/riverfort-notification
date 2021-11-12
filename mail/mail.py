@@ -20,6 +20,8 @@ def send_email(subject: str, contacts: List[str], content: str, html: str):
             subtype="html",
         )
 
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
+            smtp.starttls()
             smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             smtp.send_message(msg=msg)
+            print(f"INFO: sent email to {contact}")
