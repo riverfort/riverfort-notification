@@ -2,6 +2,7 @@ import os
 import sys
 import inspect
 import traceback
+from tabulate import tabulate
 
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -20,7 +21,23 @@ conn = Conn(
     password="rgctechnology",
 )
 
+table = []
 company_quotes = get_top_gain_company_quotes(conn=conn)
+for company_quote in company_quotes:
+    table.append(
+        [
+            company_quote.company_symbol,
+            company_quote.company_name,
+            company_quote.price,
+            company_quote.change,
+            company_quote.change_percent,
+            company_quote.market_time,
+        ]
+    )
+
+content = tabulate(
+    table, headers=["Symbol", "Name", "Price", "Change", "Change %", "Time"]
+)
 
 try:
     with open("email.txt") as f:
@@ -30,6 +47,6 @@ except:
     sys.exit()
 
 html = render_template("mail/templates/template.j2", **locals())
-send_email(subject="Top Gainers: London", contacts=contacts, content="", html=html)
+send_email(subject="Top Gainers: London", contacts=contacts, content=content, html=html)
 
 conn.close()
