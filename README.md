@@ -81,7 +81,7 @@ crontab -e
 ```
 ```
 */20 06-19 * * 1-5 bash riverfort-notification/notification.sh
-0 12 * * 1-5 bash riverfort-notification/mail.sh
+0 12 * * 1-5 . $HOME/.profile; bash riverfort-notification/mail.sh
 ```
 
 ---
